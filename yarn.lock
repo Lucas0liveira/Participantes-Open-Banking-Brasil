@@ -1906,6 +1906,11 @@ vue-router@^3.5.4:
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.6.5.tgz#95847d52b9a7e3f1361cb605c8e6441f202afad8"
   integrity sha512-VYXZQLtjuvKxxcshuRAwjHnciqZVoXAjTjcqBTz4rKc8qih9g9pI3hbDjmqXaHdgL3v8pV6P8Z335XvHzESxLQ==
 
+vue-select@^3.20.0:
+  version "3.20.0"
+  resolved "https://registry.yarnpkg.com/vue-select/-/vue-select-3.20.0.tgz#a3c4eb046654f9991ce5240e3a0679daa9e992d3"
+  integrity sha512-Qau4BzpgAC+/9jM5oTlOrfA81ONdtTFH6PqeSDKvIB56f1F6EbIR8qAotpUxrIiNVppyPFjvVDkyriMfHjWBQA==
+
 vue-template-babel-compiler@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/vue-template-babel-compiler/-/vue-template-babel-compiler-1.2.0.tgz#f77126886e868f64d2acefe5c0ecfd9c323bf943"

@@ -1,0 +1,106 @@
+<template>
+  <div class="dashboard">
+    <h1>Welcome to the Dashboard</h1>
+
+    <button @click="updateShowFilter(true)">Filter</button>
+
+    <aside v-show="this.showFilter">
+      <Filters @filter="filter()" />
+    </aside>
+
+    <VTable :organisations="displayedOrganisations" />
+
+    <hr />
+
+    <button v-if="!isMaximumAmount" @click="showMore()">Show more</button>
+    <button v-if="!isMinimumAmount" @click="showLess()">Show less</button>
+  </div>
+</template>
+
+<script>
+import { mapState, mapGetters, mapMutations } from 'vuex'
+import { fetchFromSandbox } from '@/services/participants.service'
+import { PAGE_SIZE } from '@/constants.js'
+
+export default {
+  name: 'DashboardPage',
+  components: {
+    VTable: () => import('@/components/VTable.vue'),
+    Filters: () => import('./Filters.vue'),
+  },
+  data: () => ({
+    loading: false,
+    rawData: [],
+    filteredOrganisations: [],
+    currentSlice: 0,
+  }),
+  computed: {
+    ...mapState(['showFilter']),
+    ...mapGetters(['getFilters']),
+    displayedOrganisations() {
+      return this.filteredOrganisations.slice(0, this.currentSlice)
+    },
+    isMinimumAmount() {
+      return this.displayedOrganisations.length === PAGE_SIZE
+    },
+    isMaximumAmount() {
+      return (
+        this.displayedOrganisations.length === this.filteredOrganisations.length
+      )
+    },
+  },
+
+  async mounted() {
+    await this.fetchDataAsync()
+  },
+  methods: {
+    ...mapMutations(['updateShowFilter']),
+
+    async fetchDataAsync() {
+      try {
+        this.loading = true
+        const organisations = await fetchFromSandbox()
+        this.rawData = organisations
+        this.filteredOrganisations = organisations
+        this.showMore()
+      } catch (error) {
+        console.error(error)
+      } finally {
+        this.loading = false
+      }
+    },
+
+    filter() {
+      this.currentSlice = PAGE_SIZE
+
+      this.filteredOrganisations = this.rawData.filter((organisation) => {
+        const filteredRoles =
+          this.getFilters.roles.length > 0
+            ? organisation.roles.find(({ role }) =>
+                this.getFilters.roles.includes(role)
+              )
+            : true
+
+        const filteredStatus =
+          this.getFilters.status !== ''
+            ? organisation.roles.find(
+                ({ status }) => this.getFilters.status === status
+              )
+            : true
+
+        return Boolean(filteredRoles && filteredStatus)
+      })
+    },
+
+    showMore() {
+      this.currentSlice += PAGE_SIZE
+    },
+
+    showLess() {
+      this.currentSlice -= PAGE_SIZE
+    },
+  },
+}
+</script>
+
+<style scoped></style>
