@@ -1,17 +1,23 @@
 <template>
-  <router-view />
+  <div class="app">
+    <VNavbar />
+    <router-view />
+  </div>
 </template>
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
+  components: {
+    VNavbar: () => import('@/components/VNavbar.vue'),
+  },
 
   mounted() {
-    this.$router.push("/dashboard");
+    this.$router.push('/dashboard')
   },
 
   methods: {},
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

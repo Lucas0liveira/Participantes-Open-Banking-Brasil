@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/valid-v-for -->
 <template>
   <div class="dashboard">
-    <h1>Welcome to the Dashboard</h1>
+    <h1>{{ $t('welcome') }}</h1>
 
     <v-select
       v-model="selectedEndpoint"
