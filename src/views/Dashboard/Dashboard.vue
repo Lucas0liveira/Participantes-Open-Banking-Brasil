@@ -3,6 +3,13 @@
   <div class="dashboard">
     <h1>Welcome to the Dashboard</h1>
 
+    <v-select
+      v-model="selectedEndpoint"
+      :options="endpoints"
+      :clearable="false"
+      @option:selected="(e) => fetchDataAsync(e)"
+      @option:deselected="(e) => fetchDataAsync(e)"
+    />
     <button @click="updateShowFilter(true)">Filter</button>
 
     <aside v-show="this.showFilter">
@@ -36,8 +43,12 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
-import { fetchFromSandbox } from '@/services/participants.service'
-import { PAGE_SIZE } from '@/constants.js'
+import {
+  fetchFromSandbox,
+  fetchFromProduction,
+  fetchFromOPINBrasil,
+} from '@/services/participants.service'
+import { PAGE_SIZE, ENDPOINTS } from '@/constants.js'
 
 export default {
   name: 'DashboardPage',
@@ -51,6 +62,8 @@ export default {
     rawData: [],
     filteredOrganisations: [],
     currentSlice: 0,
+    endpoints: ENDPOINTS,
+    selectedEndpoint: ENDPOINTS[0],
   }),
   computed: {
     ...mapState(['showFilter']),
@@ -69,16 +82,33 @@ export default {
   },
 
   async mounted() {
-    await this.fetchDataAsync()
+    await this.fetchDataAsync({})
   },
   methods: {
     ...mapMutations(['updateShowFilter']),
     ...mapActions(['removeRoleFilter', 'removeStatusFilter']),
 
-    async fetchDataAsync() {
+    async fetchDataAsync(source) {
+      this.loading = true
+      let endpoint = null
+
+      switch (source.code) {
+        case 'production':
+          endpoint = () => fetchFromProduction()
+          break
+        case 'op':
+          endpoint = () => fetchFromOPINBrasil()
+          break
+        default:
+          endpoint = () => fetchFromSandbox()
+          break
+      }
+
+      if (source.code === 'sandbox') {
+        endpoint = () => fetchFromSandbox()
+      }
       try {
-        this.loading = true
-        const organisations = await fetchFromSandbox()
+        const organisations = await endpoint()
         this.rawData = organisations
         this.filteredOrganisations = organisations
         this.showMore()

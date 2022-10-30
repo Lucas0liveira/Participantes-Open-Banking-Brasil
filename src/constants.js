@@ -16,3 +16,9 @@ export const STATUS_OPTIONS = [
   { label: 'Inactive', code: 'Inactive' },
   { label: 'Both', code: '' },
 ]
+
+export const ENDPOINTS = [
+  { label: 'Open Banking Brasil Sandbox', code: 'sandbox' },
+  { label: 'Open Banking Brasil Production', code: 'production' },
+  { label: 'OPINBRasil', code: 'op' },
+]
