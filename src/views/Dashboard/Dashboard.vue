@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/valid-v-for -->
 <template>
   <div class="dashboard">
     <h1>Welcome to the Dashboard</h1>
@@ -7,6 +8,22 @@
     <aside v-show="this.showFilter">
       <Filters @filter="filter()" />
     </aside>
+
+    <div>
+      <template v-for="role in getFilters.roles">
+        <VChip
+          :title="role"
+          :code="role"
+          @toggle="(e) => removeFromFilter(e, 'role')"
+        />
+      </template>
+      <VChip
+        v-if="getFilters.status"
+        :title="getFilters.status"
+        :code="getFilters.status"
+        @toggle="(e) => removeFromFilter(e, 'status')"
+      />
+    </div>
 
     <VTable :organisations="displayedOrganisations" />
 
@@ -18,7 +35,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import { fetchFromSandbox } from '@/services/participants.service'
 import { PAGE_SIZE } from '@/constants.js'
 
@@ -26,6 +43,7 @@ export default {
   name: 'DashboardPage',
   components: {
     VTable: () => import('@/components/VTable.vue'),
+    VChip: () => import('@/components/VChip.vue'),
     Filters: () => import('./Filters.vue'),
   },
   data: () => ({
@@ -55,6 +73,7 @@ export default {
   },
   methods: {
     ...mapMutations(['updateShowFilter']),
+    ...mapActions(['removeRoleFilter', 'removeStatusFilter']),
 
     async fetchDataAsync() {
       try {
@@ -90,6 +109,16 @@ export default {
 
         return Boolean(filteredRoles && filteredStatus)
       })
+    },
+
+    removeFromFilter(value, type) {
+      if (type === 'role') {
+        this.removeRoleFilter(value)
+      }
+      if (type === 'status') {
+        this.removeStatusFilter(value)
+      }
+      this.filter()
     },
 
     showMore() {

@@ -30,6 +30,16 @@ const actions = {
     const cleanFilters = initialState().filters
     commit('updateFilters', cleanFilters)
   },
+  removeRoleFilter({ commit, state }, role) {
+    const filteredRoles = state.filters.roles.filter((r) => r !== role)
+    commit('updateFilters', {
+      roles: filteredRoles,
+      status: state.filters.status,
+    })
+  },
+  removeStatusFilter({ commit, state }) {
+    commit('updateFilters', { roles: state.filters.roles, status: '' })
+  },
 }
 
 const store = new Vuex.Store({
