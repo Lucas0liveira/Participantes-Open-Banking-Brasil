@@ -22,3 +22,29 @@ export const ENDPOINTS = [
   { label: 'Open Banking Brasil Production', code: 'production' },
   { label: 'OPINBRasil', code: 'op' },
 ]
+
+export const API_RESOURCE_OPTIONS = [
+  { label: 'payments-pix', code: 'payments-pix' },
+  { label: 'payments-consents', code: 'payments-consents' },
+  { label: 'admin', code: 'admin' },
+  { label: 'discovery', code: 'discovery' },
+  { label: 'consents', code: 'consents' },
+  { label: 'customers-business', code: 'customers-business' },
+  { label: 'customers-personal', code: 'customers-personal' },
+  { label: 'resources', code: 'resources' },
+  { label: 'financings', code: 'financings' },
+  { label: 'loans', code: 'loans' },
+  { label: 'accounts', code: 'accounts' },
+  { label: 'credit-cards-accounts', code: 'credit-cards-accounts' },
+  { label: 'products-services', code: 'products-services' },
+  { label: 'invoice-financings', code: 'invoice-financings' },
+  { label: 'channels', code: 'channels' },
+  {
+    label: 'unarranged-accounts-overdraft',
+    code: 'unarranged-accounts-overdraft',
+  },
+  { label: 'opendata-investments_funds', code: 'opendata-investments_funds' },
+  { label: 'channels-branches', code: 'channels-branches' },
+  { label: 'other', code: 'other' },
+  { label: 'invoice-financing', code: 'invoice-financing' },
+]
