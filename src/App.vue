@@ -13,7 +13,7 @@ export default {
   },
 
   mounted() {
-    this.$router.push('/charts')
+    this.$router.push({ name: 'details' })
   },
 
   methods: {},
