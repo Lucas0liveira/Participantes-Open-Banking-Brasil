@@ -10,10 +10,16 @@ export default {
 
   computed: {
     smallScreenAndDown() {
-      return this.window.width <= 600
+      return this.window.width <= 700
     },
     mediumScreenAndUp() {
-      return this.window.width >= 601
+      return this.window.width >= 701
+    },
+    largeScreenAndUp() {
+      return this.window.width >= 960
+    },
+    extraLargeScreenAndUp() {
+      return this.window.width >= 1200
     },
   },
 

@@ -42,10 +42,14 @@ import {
   fetchFromProduction,
   fetchFromOPINBrasil,
 } from '@/services/participants.service'
+import mediaQueryMixin from '../../mixins/mediaQuery.mixin'
 import { PAGE_SIZE } from '@/constants.js'
 
 export default {
   name: 'DashboardPage',
+
+  mixins: [mediaQueryMixin],
+
   components: {
     VTable: () => import('@/components/VTable.vue'),
     VChip: () => import('@/components/VChip.vue'),
@@ -57,6 +61,7 @@ export default {
     filteredOrganisations: [],
     currentSlice: 0,
   }),
+
   computed: {
     ...mapState(['showFilter']),
     ...mapGetters(['getFilters']),
@@ -76,10 +81,15 @@ export default {
   async mounted() {
     await this.fetchDataAsync({})
 
+    if (this.largeScreenAndUp) {
+      this.updateShowMenu(true)
+    }
+
     this.$root.$on('fetch', async (source) => this.fetchDataAsync(source))
   },
+
   methods: {
-    ...mapMutations(['updateShowFilter']),
+    ...mapMutations(['updateShowFilter', 'updateShowMenu']),
     ...mapActions(['removeRoleFilter', 'removeStatusFilter']),
 
     async fetchDataAsync(source) {

@@ -16,6 +16,7 @@
           to="/dashboard"
           class="v-menu-body__item"
           :class="{ center: !showMenu }"
+          @click.native="toggleMenu()"
         >
           <fa-icon icon="server" />
           <p v-show="showMenu">Dashboard</p>
@@ -25,6 +26,7 @@
           to="/charts"
           class="v-menu-body__item"
           :class="{ center: !showMenu }"
+          @click.native="toggleMenu()"
         >
           <fa-icon icon="chart-simple" />
           <p v-show="showMenu">Charts</p>

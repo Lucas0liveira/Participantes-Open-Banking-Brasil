@@ -6,7 +6,7 @@ export const capitalizeSentence = (sentence) => {
   sentence = sentence.toLowerCase().replace(/ +/g, ' ')
   let words = sentence.split(' ')
 
-  words = words.map((word) => word[0].toUpperCase() + word.substr(1))
+  words = words.map((word) => word.charAt(0).toUpperCase() + word.substr(1))
   words = words.join(' ')
   return words
 }
