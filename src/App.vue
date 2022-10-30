@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <VNavbar />
+    <VMenu />
     <router-view />
   </div>
 </template>
@@ -9,15 +9,14 @@
 export default {
   name: 'App',
   components: {
-    VNavbar: () => import('@/components/VNavbar.vue'),
-  },
-
-  mounted() {
-    this.$router.push({ name: 'details' })
+    VMenu: () => import('@/components/VMenu.vue'),
   },
 
   methods: {},
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.app {
+}
+</style>

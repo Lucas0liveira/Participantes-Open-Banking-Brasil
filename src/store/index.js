@@ -9,7 +9,7 @@ const initialState = () => ({
     status: '',
   },
   showFilter: false,
-  showMenu: false,
+  showMenu: true,
   detailedOrganisation: {},
 })
 const state = initialState()

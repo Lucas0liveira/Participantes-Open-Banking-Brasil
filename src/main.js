@@ -4,8 +4,10 @@ import store from './store'
 import router from './router'
 import i18n from './i18n'
 import VueApexCharts from 'vue-apexcharts'
-
 import VSelect from 'vue-select'
+
+import '@/assets/base.scss'
+import '@/plugins/fontAwesome.plugin.js'
 
 new Vue({
   store,
