@@ -2,6 +2,13 @@
   <div class="v-navbar">
     <button @click="toggleMenu()">open</button>
     <v-select
+      v-model="selectedEndpoint"
+      :options="endpoints"
+      :clearable="false"
+      @option:selected="(e) => fetch(e)"
+      @option:deselected="(e) => fetch(e)"
+    />
+    <v-select
       v-model="currentLang"
       :clearable="false"
       :options="[
@@ -16,6 +23,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import { ENDPOINTS } from '@/constants.js'
 
 export default {
   name: 'VNavbar',
@@ -24,6 +32,8 @@ export default {
   },
   data() {
     return {
+      endpoints: ENDPOINTS,
+      selectedEndpoint: ENDPOINTS[0],
       currentLang: {
         label: 'English',
         code: 'en',
@@ -35,6 +45,10 @@ export default {
   },
   methods: {
     ...mapMutations(['updateShowMenu']),
+
+    fetch(source) {
+      this.$root.$emit('fetch', source)
+    },
 
     toggleMenu() {
       this.updateShowMenu(!this.showMenu)

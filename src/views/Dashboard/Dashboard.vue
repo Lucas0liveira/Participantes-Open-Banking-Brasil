@@ -3,13 +3,6 @@
   <div class="dashboard">
     <h1>{{ $t('welcome') }}</h1>
 
-    <v-select
-      v-model="selectedEndpoint"
-      :options="endpoints"
-      :clearable="false"
-      @option:selected="(e) => fetchDataAsync(e)"
-      @option:deselected="(e) => fetchDataAsync(e)"
-    />
     <button @click="updateShowFilter(true)">Filter</button>
 
     <aside v-show="this.showFilter">
@@ -49,7 +42,7 @@ import {
   fetchFromProduction,
   fetchFromOPINBrasil,
 } from '@/services/participants.service'
-import { PAGE_SIZE, ENDPOINTS } from '@/constants.js'
+import { PAGE_SIZE } from '@/constants.js'
 
 export default {
   name: 'DashboardPage',
@@ -63,8 +56,6 @@ export default {
     rawData: [],
     filteredOrganisations: [],
     currentSlice: 0,
-    endpoints: ENDPOINTS,
-    selectedEndpoint: ENDPOINTS[0],
   }),
   computed: {
     ...mapState(['showFilter']),
@@ -84,6 +75,8 @@ export default {
 
   async mounted() {
     await this.fetchDataAsync({})
+
+    this.$root.$on('fetch', async (source) => this.fetchDataAsync(source))
   },
   methods: {
     ...mapMutations(['updateShowFilter']),
