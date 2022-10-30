@@ -9,6 +9,7 @@ const initialState = () => ({
     status: '',
   },
   showFilter: false,
+  showMenu: false,
 })
 const state = initialState()
 
@@ -22,6 +23,9 @@ const mutations = {
   },
   updateShowFilter: (state, payload) => {
     state.showFilter = payload
+  },
+  updateShowMenu: (state, payload) => {
+    state.showMenu = payload
   },
 }
 

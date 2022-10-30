@@ -1,6 +1,6 @@
 <template>
   <div class="v-navbar">
-    <button>open</button>
+    <button @click="toggleMenu()">open</button>
     <v-select
       v-model="currentLang"
       :clearable="false"
@@ -10,12 +10,18 @@
       ]"
       @option:selected="(e) => changeLocale(e.code)"
     />
+    <VMenu />
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
+
 export default {
   name: 'VNavbar',
+  components: {
+    VMenu: () => import('@/components/VMenu.vue'),
+  },
   data() {
     return {
       currentLang: {
@@ -24,7 +30,16 @@ export default {
       },
     }
   },
+  computed: {
+    ...mapState(['showMenu']),
+  },
   methods: {
+    ...mapMutations(['updateShowMenu']),
+
+    toggleMenu() {
+      this.updateShowMenu(!this.showMenu)
+    },
+
     changeLocale(locale) {
       this.$i18n.locale = locale
     },
