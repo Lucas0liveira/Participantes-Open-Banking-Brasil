@@ -1,10 +1,10 @@
 <template>
-  <div class="charts">Welcome to the Charts</div>
+  <div class="charts">Welcome to the Details</div>
 </template>
 
 <script>
 export default {
-  name: 'ChartsPage',
+  name: 'DetailsPage',
   data() {
     return {}
   },

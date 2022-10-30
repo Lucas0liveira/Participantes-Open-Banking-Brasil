@@ -32,12 +32,13 @@
       />
     </div>
 
-    <VTable :organisations="displayedOrganisations" />
-
-    <hr />
-
-    <button v-if="!isMaximumAmount" @click="showMore()">Show more</button>
-    <button v-if="!isMinimumAmount" @click="showLess()">Show less</button>
+    <VTable
+      :organisations="displayedOrganisations"
+      :canShowMore="!isMaximumAmount"
+      :canShowLess="!isMinimumAmount"
+      @showMore="showMore()"
+      @showLess="showLess()"
+    />
   </div>
 </template>
 

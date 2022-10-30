@@ -1,22 +1,22 @@
-import * as participantsAPI from "@/api/participants.api";
+import * as participantsAPI from '@/api/participants.api'
 
 export const fetchFromSandbox = async (params) => {
-  const organisations = await participantsAPI.fetchFromSandbox(params);
+  const organisations = await participantsAPI.fetchFromSandbox(params)
 
-  return cleanResults(organisations);
-};
+  return cleanResults(organisations)
+}
 
 export const fetchFromProduction = async (params) => {
-  const organisations = await participantsAPI.fetchFromProduction(params);
+  const organisations = await participantsAPI.fetchFromProduction(params)
 
-  return cleanResults(organisations);
-};
+  return cleanResults(organisations)
+}
 
 export const fetchFromOPINBrasil = async (params) => {
-  const organisations = await participantsAPI.fetchFromOPINBrasil(params);
+  const organisations = await participantsAPI.fetchFromOPINBrasil(params)
 
-  return cleanResults(organisations);
-};
+  return cleanResults(organisations)
+}
 
 function cleanResults(organisations) {
   const cleanOrganisationData = organisations.map((organisation) => ({
@@ -24,7 +24,8 @@ function cleanResults(organisations) {
     legalEntityName: organisation.LegalEntityName,
     organisationCnpj: organisation.RegistrationNumber,
     status: organisation.Status,
-    address: organisation.AddressLine1 + ", " + organisation.AddressLine2,
+    address: organisation.AddressLine1,
+    city: organisation.City,
 
     authServers: organisation.AuthorisationServers.map((server) => ({
       authServerName: server.CustomerFriendlyName,
@@ -42,6 +43,6 @@ function cleanResults(organisations) {
       role: claim.Role,
       status: claim.Status,
     })),
-  }));
-  return cleanOrganisationData;
+  }))
+  return cleanOrganisationData
 }
