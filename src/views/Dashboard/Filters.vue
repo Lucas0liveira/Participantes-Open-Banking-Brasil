@@ -16,16 +16,17 @@
 
       <template v-slot:body>
         <div class="v-filter-body">
-          <v-select
-            v-model="activeRoles"
-            multiple
+          <VSelect
+            label="Roles"
+            :selected="activeRoles"
             :options="rolesOptions"
             @option:selecting="(e) => toggleRoleToFilter(e.code)"
             @option:deselecting="(e) => toggleRoleToFilter(e.code)"
           />
 
-          <v-select
-            v-model="selectedStatus"
+          <VSelect
+            label="Role Status"
+            :selected="selectedStatus"
             :options="statusOptions"
             @option:selecting="(e) => updateStatus(e.code)"
           />
@@ -55,6 +56,7 @@ export default {
   components: {
     VSideBar: () => import('@/components/VSideBar.vue'),
     VButton: () => import('@/components/VButton.vue'),
+    VSelect: () => import('@/components/VSelect.vue'),
   },
 
   data() {
@@ -140,6 +142,10 @@ export default {
 }
 
 .v-filter-body {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+  gap: 2rem;
 }
 .v-filter-footer {
   display: flex;
