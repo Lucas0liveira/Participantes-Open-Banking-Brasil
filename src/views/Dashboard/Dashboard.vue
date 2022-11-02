@@ -1,15 +1,22 @@
 <!-- eslint-disable vue/valid-v-for -->
 <template>
   <div class="dashboard">
-    <h1>{{ $t('welcome') }}</h1>
-
-    <button @click="updateShowFilter(true)">Filter</button>
+    <VPageHeader :title="$t('welcome')">
+      <template v-slot:actions>
+        <VButton
+          title="Filter"
+          icon="filter"
+          :iconOnly="smallScreenAndDown"
+          @click="updateShowFilter(true)"
+        />
+      </template>
+    </VPageHeader>
 
     <aside v-show="this.showFilter">
-      <Filters @filter="filter()" />
+      <Filters @filter="filter()" @close="updateShowFilter(false)" />
     </aside>
 
-    <div>
+    <div class="dashboard__chips">
       <template v-for="role in getFilters.roles">
         <VChip
           :title="role"
@@ -52,6 +59,8 @@ export default {
 
   components: {
     VTable: () => import('@/components/VTable.vue'),
+    VButton: () => import('@/components/VButton.vue'),
+    VPageHeader: () => import('@/components/VPageHeader.vue'),
     VChip: () => import('@/components/VChip.vue'),
     Filters: () => import('./Filters.vue'),
   },
@@ -166,4 +175,13 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.dashboard {
+  width: 100%;
+  max-width: 960px;
+  &__chips {
+    display: flex;
+    margin-bottom: 2rem;
+  }
+}
+</style>

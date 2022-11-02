@@ -1,5 +1,5 @@
 <template>
-  <VSidebar :open="showMenu" from="left" :width="showMenu ? '300' : '64'">
+  <VSidebar :open="showMenu" from="left" :width="showMenu ? '300px' : '64px'">
     <template v-slot:header>
       <div
         class="v-menu-header"
@@ -16,7 +16,6 @@
           to="/dashboard"
           class="v-menu-body__item"
           :class="{ center: !showMenu }"
-          @click.native="toggleMenu()"
         >
           <fa-icon icon="server" />
           <p v-show="showMenu">Dashboard</p>
@@ -26,7 +25,6 @@
           to="/charts"
           class="v-menu-body__item"
           :class="{ center: !showMenu }"
-          @click.native="toggleMenu()"
         >
           <fa-icon icon="chart-simple" />
           <p v-show="showMenu">Charts</p>
@@ -98,6 +96,7 @@ export default {
     ...mapMutations(['updateShowMenu']),
 
     fetch(source) {
+      this.updateShowMenu(false)
       this.$root.$emit('fetch', source)
     },
 

@@ -25,6 +25,11 @@ export default {
 @import '@/assets/variables';
 
 .v-button {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+
   border: none;
   border-radius: 4px;
   cursor: pointer;

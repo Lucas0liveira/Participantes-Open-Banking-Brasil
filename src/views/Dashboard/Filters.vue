@@ -1,39 +1,62 @@
 <template>
-  <VSideBar>
-    <template v-slot:body>
-      <v-select
-        v-model="activeRoles"
-        multiple
-        :options="rolesOptions"
-        @option:selecting="(e) => toggleRoleToFilter(e.code)"
-        @option:deselecting="(e) => toggleRoleToFilter(e.code)"
-      />
+  <div>
+    <div class="mask" @click="$emit('close')" />
+    <VSideBar
+      :width="smallScreenAndDown ? '100%' : '400px'"
+      from="right"
+      background="secondary"
+    >
+      <template v-slot:header>
+        <div class="v-filter-header" @click="$emit('close')">
+          <p>Filters</p>
+          <fa-icon icon="xmark" />
+        </div>
+        <hr />
+      </template>
 
-      <v-select
-        v-model="selectedStatus"
-        :options="statusOptions"
-        @option:selecting="(e) => updateStatus(e.code)"
-      />
-    </template>
+      <template v-slot:body>
+        <div class="v-filter-body">
+          <v-select
+            v-model="activeRoles"
+            multiple
+            :options="rolesOptions"
+            @option:selecting="(e) => toggleRoleToFilter(e.code)"
+            @option:deselecting="(e) => toggleRoleToFilter(e.code)"
+          />
 
-    <template v-slot:actions>
-      <hr />
-      <button @click="filter()">Filter</button>
-      <button @click="clearFilters()">Clear</button>
-      <hr />
-    </template>
-  </VSideBar>
+          <v-select
+            v-model="selectedStatus"
+            :options="statusOptions"
+            @option:selecting="(e) => updateStatus(e.code)"
+          />
+        </div>
+      </template>
+
+      <template v-slot:footer>
+        <div class="v-filter-footer">
+          <VButton type="secondary" title="Clear" @click="clearFilters()" />
+          <VButton title="Filter" @click="filter()" />
+        </div>
+      </template>
+    </VSideBar>
+  </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
+import mediaQueryMixin from '../../mixins/mediaQuery.mixin'
 import { ROLE_OPTIONS, STATUS_OPTIONS } from '@/constants.js'
 
 export default {
   name: 'DashBoardFilters',
+
+  mixins: [mediaQueryMixin],
+
   components: {
     VSideBar: () => import('@/components/VSideBar.vue'),
+    VButton: () => import('@/components/VButton.vue'),
   },
+
   data() {
     return {
       rolesOptions: ROLE_OPTIONS,
@@ -42,9 +65,11 @@ export default {
       selectedStatus: '',
     }
   },
+
   computed: {
     ...mapGetters(['getFilters']),
   },
+
   methods: {
     ...mapMutations(['updateFilters', 'updateShowFilter']),
     ...mapActions(['resetFilters']),
@@ -81,4 +106,53 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import '@/assets/variables';
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $dark-text-color;
+  opacity: 0.2;
+  cursor: pointer;
+}
+.v-filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+
+  p {
+    font-size: 18px;
+    font-weight: 700;
+    color: $dark-gray-color;
+  }
+
+  svg {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    color: $neutral-gray-color;
+  }
+}
+
+.v-filter-body {
+}
+.v-filter-footer {
+  display: flex;
+  gap: 1rem;
+
+  button {
+    display: block !important;
+    width: 100%;
+  }
+}
+hr {
+  margin: -1rem;
+  border: none;
+  border-bottom: 2px solid $background;
+}
+</style>

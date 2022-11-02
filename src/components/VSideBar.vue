@@ -1,8 +1,8 @@
 <template>
   <aside
     class="v-sidebar"
-    :class="from"
-    :style="smallScreenAndDown && open ? 'width: 100%' : `width: ${width}px`"
+    :class="`${from} ${background}`"
+    :style="smallScreenAndDown && open ? 'width: 100%' : `width: ${width}`"
   >
     <div class="v-sidebar__header">
       <slot name="header"></slot>
@@ -32,6 +32,10 @@ export default {
     open: Boolean,
     from: String,
     width: String,
+    background: {
+      type: String,
+      default: 'primary',
+    },
   },
   data() {
     return {}
@@ -53,7 +57,6 @@ export default {
   top: 0;
 
   transition: all 0.3s ease-out;
-  background-color: $primary-color;
   padding: 1rem;
   z-index: 2;
 
@@ -68,5 +71,13 @@ export default {
 
 .left {
   left: 0;
+}
+
+.primary {
+  background-color: $primary-color;
+}
+
+.secondary {
+  background-color: $secondary-color;
 }
 </style>

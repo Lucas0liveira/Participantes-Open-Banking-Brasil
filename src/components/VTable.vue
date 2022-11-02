@@ -119,9 +119,7 @@ export default {
     ...mapState(['showMenu']),
 
     showDesktopVersion() {
-      return (
-        this.extraLargeScreenAndUp || (this.largeScreenAndUp && !this.showMenu)
-      )
+      return this.largeScreenAndUp || (this.mediumScreenAndUp && !this.showMenu)
     },
   },
 
@@ -156,17 +154,17 @@ $closed-menu-offset: 160px;
 
   .v-table {
     background-color: #fff;
-    box-shadow: 4px 4px 16px 0px rgba(60, 74, 117, 0.54);
+    box-shadow: 0px 16px 24px #0000000f;
     padding: 2rem;
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
 
     thead {
-      color: $dark-text-color;
+      color: $dark-gray-color;
       font-weight: 900 !important;
       font-size: 16px;
-      border-bottom: 1.4px solid;
+      border-bottom: 1.4px solid $background;
 
       th {
         padding: 1.5rem 0.5rem 0.5rem 0.5rem;
@@ -182,7 +180,7 @@ $closed-menu-offset: 160px;
     }
 
     tbody {
-      color: $neutral-text-color;
+      color: $medium-gray-color;
       font-size: 14px;
       font-weight: 500;
 
@@ -220,7 +218,7 @@ $closed-menu-offset: 160px;
 
       td {
         padding: 1rem;
-        border-bottom: 2px solid $light-text-color;
+        border-bottom: 2px solid $background;
         cursor: pointer;
       }
     }
@@ -295,7 +293,7 @@ $closed-menu-offset: 160px;
       gap: 0.2rem;
       padding: 0.5rem;
       cursor: pointer;
-      color: $neutral-text-color;
+      color: $neutral-gray-color;
       position: relative;
 
       background-color: #fff;
@@ -327,13 +325,16 @@ $closed-menu-offset: 160px;
         display: flex;
         flex-direction: column;
         width: 100%;
+        padding-left: 1rem;
 
         &--title {
+          color: $medium-gray-color;
           font-size: 12px;
           font-weight: 900;
         }
 
         &--value {
+          color: $medium-gray-color;
           font-size: 14px;
         }
       }
