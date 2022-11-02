@@ -302,6 +302,8 @@ $closed-menu-offset: 160px;
       border-radius: 8px;
 
       &-bundle--status {
+        opacity: 0.8;
+
         p {
           position: absolute;
           top: 0;

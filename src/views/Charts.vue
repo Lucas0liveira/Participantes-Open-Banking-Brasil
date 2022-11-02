@@ -1,26 +1,32 @@
 <template>
   <div class="charts">
-    <h1>Welcome to the Charts</h1>
-    <v-apexchart
-      width="500"
-      type="donut"
-      :options="bankPerRole.chartOptions"
-      :series="bankPerRole.series"
-    ></v-apexchart>
+    <div v-if="mediumScreenAndUp" class="charts-top">
+      <VChart
+        title="Distribution of roles by participants"
+        type="donut"
+        :options="bankPerRole.chartOptions"
+        :series="bankPerRole.series"
+      />
 
-    <v-apexchart
-      width="500"
+      <VChart
+        title="Average number of resouces per server"
+        type="radialBar"
+        :options="averageResourcesPerServer.chartOptions"
+        :series="averageResourcesPerServer.series"
+      />
+    </div>
+
+    <VChart
+      v-if="mediumScreenAndUp"
+      title="Distribution of resources between banks"
       type="area"
       :options="serversPerResource.options"
       :series="serversPerResource.series"
-    ></v-apexchart>
+    />
 
-    <v-apexchart
-      width="500"
-      type="radialBar"
-      :options="averageRolesPerServer.chartOptions"
-      :series="averageRolesPerServer.series"
-    ></v-apexchart>
+    <p v-else class="charts__alert">
+      Charts are better visualized in a larger screen :(
+    </p>
   </div>
 </template>
 
@@ -30,10 +36,17 @@ import {
   fetchFromProduction,
   fetchFromOPINBrasil,
 } from '@/services/participants.service'
+import mediaQueryMixin from '@/mixins/mediaQuery.mixin'
 import { ROLE_OPTIONS, API_RESOURCE_OPTIONS } from '@/constants.js'
 
 export default {
   name: 'ChartsPage',
+
+  mixins: [mediaQueryMixin],
+
+  components: {
+    VChart: () => import('@/components/VChart.vue'),
+  },
 
   data: () => ({
     loading: false,
@@ -105,7 +118,7 @@ export default {
       }
     },
 
-    averageRolesPerServer() {
+    averageResourcesPerServer() {
       const resourceAmounts = []
 
       this.data.forEach((org) => {
@@ -115,9 +128,10 @@ export default {
         })
       })
 
-      const average =
+      const average = (
         resourceAmounts.reduce((prev, curr) => prev + curr, 0) /
         resourceAmounts.length
+      ).toFixed(2)
 
       const maxValue = 8
       const minValue = 0
@@ -139,6 +153,7 @@ export default {
               },
             },
           },
+          labels: ['Resources'],
         },
         series: [((average - minValue) * 100) / (maxValue - minValue)],
       }
@@ -183,4 +198,42 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.charts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1rem;
+  width: 100%;
+  max-width: 960px;
+
+  &-top {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+
+    @media (max-width: 960px) {
+      flex-direction: column;
+    }
+  }
+}
+</style>
+<!-- .charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+
+  &__wrapper {
+    background-color: #fff;
+    border-radius: 6px;
+    grid-row: 1;
+  }
+
+  .large {
+    grid-row: 2;
+    column-span: all;
+  }
+} -->
