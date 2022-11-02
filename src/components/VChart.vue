@@ -30,7 +30,6 @@ export default {
   background-color: #fff;
   border-radius: 4px;
   padding: 1rem;
-  height: 100%;
   width: 100%;
 
   &__title {

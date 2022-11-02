@@ -1,32 +1,35 @@
 <template>
-  <div class="charts">
-    <div v-if="mediumScreenAndUp" class="charts-top">
-      <VChart
-        title="Distribution of roles by participants"
-        type="donut"
-        :options="bankPerRole.chartOptions"
-        :series="bankPerRole.series"
-      />
+  <div class="charts-container">
+    <VPageHeader :title="$t('welcome')" />
+    <div class="charts">
+      <div v-if="mediumScreenAndUp" class="charts-top">
+        <VChart
+          title="Distribution of roles by participants"
+          type="donut"
+          :options="bankPerRole.chartOptions"
+          :series="bankPerRole.series"
+        />
+
+        <VChart
+          title="Average number of resouces per server"
+          type="radialBar"
+          :options="averageResourcesPerServer.chartOptions"
+          :series="averageResourcesPerServer.series"
+        />
+      </div>
 
       <VChart
-        title="Average number of resouces per server"
-        type="radialBar"
-        :options="averageResourcesPerServer.chartOptions"
-        :series="averageResourcesPerServer.series"
+        v-if="mediumScreenAndUp"
+        title="Distribution of resources between banks"
+        type="area"
+        :options="serversPerResource.options"
+        :series="serversPerResource.series"
       />
+
+      <p v-else class="charts__alert">
+        Charts are better visualized in a larger screen :(
+      </p>
     </div>
-
-    <VChart
-      v-if="mediumScreenAndUp"
-      title="Distribution of resources between banks"
-      type="area"
-      :options="serversPerResource.options"
-      :series="serversPerResource.series"
-    />
-
-    <p v-else class="charts__alert">
-      Charts are better visualized in a larger screen :(
-    </p>
   </div>
 </template>
 
@@ -46,6 +49,7 @@ export default {
 
   components: {
     VChart: () => import('@/components/VChart.vue'),
+    VPageHeader: () => import('@/components/VPageHeader.vue'),
   },
 
   data: () => ({
@@ -199,6 +203,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.charts-container {
+  width: 100%;
+  max-width: 960px;
+}
 .charts {
   display: flex;
   flex-direction: column;
@@ -206,7 +214,6 @@ export default {
   justify-content: center;
   row-gap: 1rem;
   width: 100%;
-  max-width: 960px;
 
   &-top {
     display: flex;
