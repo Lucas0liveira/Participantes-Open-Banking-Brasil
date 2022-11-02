@@ -219,21 +219,3 @@ export default {
   }
 }
 </style>
-<!-- .charts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 1rem;
-  width: 100%;
-
-  &__wrapper {
-    background-color: #fff;
-    border-radius: 6px;
-    grid-row: 1;
-  }
-
-  .large {
-    grid-row: 2;
-    column-span: all;
-  }
-} -->
