@@ -12,8 +12,11 @@
 </template>
 
 <script>
+import mediaQueryMixin from '@/mixins/mediaQuery.mixin.js'
 export default {
   name: 'VChart',
+
+  mixins: [mediaQueryMixin],
 
   props: {
     title: String,

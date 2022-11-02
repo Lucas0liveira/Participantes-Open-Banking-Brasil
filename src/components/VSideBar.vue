@@ -12,7 +12,7 @@
       <slot name="body"></slot>
     </div>
 
-    <div class="v-sidebar__actionsS">
+    <div class="v-sidebar__actions">
       <slot name="actions"></slot>
     </div>
 

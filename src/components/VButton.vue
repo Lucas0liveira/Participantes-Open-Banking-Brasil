@@ -1,6 +1,6 @@
 <template>
   <button class="v-button" :class="type" @click="$emit('click')">
-    <fa-icon v-if="icon" :icon="icon" />
+    <fa-icon class="icon" v-if="icon" :icon="icon" />
     <p v-if="!iconOnly">{{ title }}</p>
   </button>
 </template>
