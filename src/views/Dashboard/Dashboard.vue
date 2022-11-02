@@ -16,6 +16,10 @@
       <Filters @filter="filter()" @close="updateShowFilter(false)" />
     </aside>
 
+    <aside v-show="this.showDetails">
+      <Details @close="updateShowDetails(false)" />
+    </aside>
+
     <div class="dashboard__chips">
       <template v-for="role in getFilters.roles">
         <VChip
@@ -63,6 +67,7 @@ export default {
     VPageHeader: () => import('@/components/VPageHeader.vue'),
     VChip: () => import('@/components/VChip.vue'),
     Filters: () => import('./Filters.vue'),
+    Details: () => import('./Details.vue'),
   },
   data: () => ({
     loading: false,
@@ -72,7 +77,7 @@ export default {
   }),
 
   computed: {
-    ...mapState(['showFilter']),
+    ...mapState(['showFilter', 'showDetails']),
     ...mapGetters(['getFilters']),
     displayedOrganisations() {
       return this.filteredOrganisations.slice(0, this.currentSlice)
@@ -98,7 +103,11 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['updateShowFilter', 'updateShowMenu']),
+    ...mapMutations([
+      'updateShowFilter',
+      'updateShowMenu',
+      'updateShowDetails',
+    ]),
     ...mapActions(['removeRoleFilter', 'removeStatusFilter']),
 
     async fetchDataAsync(source) {

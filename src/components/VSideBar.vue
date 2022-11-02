@@ -52,6 +52,8 @@ export default {
   flex-direction: column;
   height: 100vh;
   gap: 1rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
 
   position: fixed;
   top: 0;
@@ -59,7 +61,11 @@ export default {
   transition: all 0.3s ease-out;
   padding: 1rem;
   z-index: 2;
-
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
   &__footer {
     margin-top: auto;
   }

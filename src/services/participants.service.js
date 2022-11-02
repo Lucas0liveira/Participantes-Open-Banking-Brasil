@@ -30,7 +30,7 @@ function cleanResults(organisations) {
     authServers: organisation.AuthorisationServers.map((server) => ({
       authServerName: server.CustomerFriendlyName,
       authServerDescription: server.CustomerFriendlyDescription,
-      documentation: server.DeveloperPortalUri,
+      authorisationServerId: server.AuthorisationServerId,
 
       apiResources: server.ApiResources.map((resource) => ({
         familyType: resource.ApiFamilyType,

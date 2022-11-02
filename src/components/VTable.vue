@@ -129,11 +129,11 @@ export default {
 
   methods: {
     capitalizeSentence,
-    ...mapMutations(['updateDetailedOrganisation']),
+    ...mapMutations(['updateDetailedOrganisation', 'updateShowDetails']),
 
     openDetails(org) {
       this.updateDetailedOrganisation(org)
-      this.$router.push({ name: 'details' })
+      this.updateShowDetails(true)
     },
   },
 }

@@ -7,9 +7,9 @@
       background="secondary"
     >
       <template v-slot:header>
-        <div class="v-filter-header" @click="$emit('close')">
+        <div class="v-filter-header">
           <p>Filters</p>
-          <fa-icon icon="xmark" />
+          <fa-icon icon="xmark" @click="$emit('close')" />
         </div>
         <hr />
       </template>

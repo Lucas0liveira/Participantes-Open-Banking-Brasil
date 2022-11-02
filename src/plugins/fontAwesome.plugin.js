@@ -10,6 +10,8 @@ import {
   faCircleCheck,
   faCircleXmark,
   faXmark,
+  faChevronDown,
+  faChevronUp,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -20,7 +22,9 @@ library.add(
   faChartSimple,
   faCircleCheck,
   faCircleXmark,
-  faXmark
+  faXmark,
+  faChevronDown,
+  faChevronUp
 )
 
 Vue.component('fa-icon', FontAwesomeIcon)
