@@ -9,8 +9,10 @@
       :options="options"
       width="300px"
       :clearable="clearable"
+      :multiple="multiple"
       :placeholder="placeholder"
       @option:selected="(e) => $emit('selected', e)"
+      @option:selecting="(e) => $emit('selecting', e)"
       @option:deselected="(e) => $emit('deselected', e)"
     />
   </div>
@@ -20,15 +22,22 @@
 import 'vue-select/dist/vue-select.css'
 
 export default {
-  name: 'VSideBar',
+  name: 'VCustomSelect',
   model: {
     props: 'selected',
     event: 'selected',
   },
   props: {
-    selected: Object,
+    selected: [Array, Object],
     options: Array,
-    clearable: Boolean,
+    clearable: {
+      type: Boolean,
+      default: false,
+    },
+    multiple: {
+      type: Boolean,
+      default: false,
+    },
     label: String,
     placeholder: String,
   },
@@ -62,6 +71,16 @@ export default {
 #v-select {
   ::v-deep .vs__dropdown-toggle {
     border: 1.6px solid $neutral-gray-color !important;
+  }
+  ::v-deep .vs__selected {
+    background-color: #fff !important;
+    border: 2px solid $neutral-gray-color !important;
+    font-weight: 600;
+    color: $medium-gray-color;
+
+    svg {
+      fill: $error;
+    }
   }
   .v-select {
     border-radius: 0;

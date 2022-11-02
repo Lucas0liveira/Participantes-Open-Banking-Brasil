@@ -41,7 +41,6 @@
           :options="endpoints"
           :clearable="false"
           @selected="(e) => fetch(e)"
-          @deselected="(e) => fetch(e)"
         />
         <VSelect
           v-show="showMenu"
@@ -81,21 +80,36 @@ export default {
     return {
       endpoints: ENDPOINTS,
       selectedEndpoint: ENDPOINTS[0],
-      currentLang: {
-        label: 'English',
-        code: 'en',
-      },
     }
   },
 
   computed: {
     ...mapState(['showMenu']),
+
+    currentLang: {
+      get() {
+        if (this.$i18n.locale === 'en') {
+          return {
+            label: 'English',
+            code: 'en',
+          }
+        }
+        return {
+          label: 'Português Brasileiro',
+          code: 'ptbr',
+        }
+      },
+      set(value) {
+        this.$i18n.locale = value
+      },
+    },
   },
 
   methods: {
     ...mapMutations(['updateShowMenu']),
 
     fetch(source) {
+      this.selectedEndpoint = source
       this.updateShowMenu(false)
       this.$root.$emit('fetch', source)
     },

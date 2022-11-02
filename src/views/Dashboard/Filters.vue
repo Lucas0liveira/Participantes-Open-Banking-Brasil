@@ -20,15 +20,16 @@
             label="Roles"
             :selected="activeRoles"
             :options="rolesOptions"
-            @option:selecting="(e) => toggleRoleToFilter(e.code)"
-            @option:deselecting="(e) => toggleRoleToFilter(e.code)"
+            :multiple="true"
+            @selecting="(e) => toggleRoleToFilter(e.code)"
+            @deselected="(e) => toggleRoleToFilter(e)"
           />
 
           <VSelect
             label="Role Status"
             :selected="selectedStatus"
             :options="statusOptions"
-            @option:selecting="(e) => updateStatus(e.code)"
+            @selected="(e) => updateStatus(e.code)"
           />
         </div>
       </template>
@@ -63,13 +64,25 @@ export default {
     return {
       rolesOptions: ROLE_OPTIONS,
       statusOptions: STATUS_OPTIONS,
-      activeRoles: [],
-      selectedStatus: '',
     }
   },
 
   computed: {
     ...mapGetters(['getFilters']),
+
+    selectedStatus: {
+      get() {
+        return this.statusOptions.find(
+          (option) => option.code === this.getFilters.status
+        )
+      },
+      set(value) {
+        this.updateFilters({ roles: this.getFilters.roles, status: value })
+      },
+    },
+    activeRoles() {
+      return this.getFilters.roles
+    },
   },
 
   methods: {
