@@ -6,7 +6,7 @@ import ptbr from './locales/ptbr.json'
 Vue.use(VueI18n)
 
 const i18n = new VueI18n({
-  locale: 'ptbr',
+  locale: 'en',
   fallbackLocale: 'en',
   messages: {
     en: en,

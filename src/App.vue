@@ -1,6 +1,7 @@
 <template>
   <div class="app">
     <VMenu />
+    <VLoading v-show="isLoading" />
     <div
       class="content"
       :class="{
@@ -25,10 +26,11 @@ export default {
 
   components: {
     VMenu: () => import('@/components/VMenu.vue'),
+    VLoading: () => import('@/components/VLoading.vue'),
   },
 
   computed: {
-    ...mapState(['showMenu']),
+    ...mapState(['showMenu', 'isLoading']),
   },
 
   methods: {},

@@ -12,6 +12,7 @@ const initialState = () => ({
   showMenu: false,
   showDetails: false,
   detailedOrganisation: {},
+  isLoading: false,
 })
 const state = initialState()
 
@@ -35,6 +36,9 @@ const mutations = {
   },
   updateDetailedOrganisation: (state, payload) => {
     state.detailedOrganisation = payload
+  },
+  updateIsLoading: (state, payload) => {
+    state.isLoading = payload
   },
 }
 

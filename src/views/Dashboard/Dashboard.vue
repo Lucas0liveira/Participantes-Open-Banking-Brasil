@@ -17,7 +17,7 @@
     </aside>
 
     <aside v-show="this.showDetails">
-      <Details @close="updateShowDetails(false)" />
+      <DetailsBar @close="updateShowDetails(false)" />
     </aside>
 
     <div class="dashboard__chips">
@@ -67,10 +67,9 @@ export default {
     VPageHeader: () => import('@/components/VPageHeader.vue'),
     VChip: () => import('@/components/VChip.vue'),
     Filters: () => import('./Filters.vue'),
-    Details: () => import('./Details.vue'),
+    DetailsBar: () => import('./Details.vue'),
   },
   data: () => ({
-    loading: false,
     rawData: [],
     filteredOrganisations: [],
     currentSlice: 0,
@@ -107,12 +106,13 @@ export default {
       'updateShowFilter',
       'updateShowMenu',
       'updateShowDetails',
+      'updateIsLoading',
     ]),
-    ...mapActions(['removeRoleFilter', 'removeStatusFilter']),
+    ...mapActions(['removeRoleFilter', 'resetFilters', 'removeStatusFilter']),
 
     async fetchDataAsync(source) {
-      this.loading = true
       let endpoint = null
+      this.resetFilters()
 
       switch (source.code) {
         case 'production':
@@ -129,6 +129,8 @@ export default {
       if (source.code === 'sandbox') {
         endpoint = () => fetchFromSandbox()
       }
+
+      this.updateIsLoading(true)
       try {
         const organisations = await endpoint()
         this.rawData = organisations
@@ -137,12 +139,13 @@ export default {
       } catch (error) {
         console.error(error)
       } finally {
-        this.loading = false
+        this.updateIsLoading(false)
       }
     },
 
     filter() {
       this.currentSlice = PAGE_SIZE
+      this.updateIsLoading(true)
 
       this.filteredOrganisations = this.rawData.filter((organisation) => {
         const filteredRoles =
@@ -161,6 +164,7 @@ export default {
 
         return Boolean(filteredRoles && filteredStatus)
       })
+      this.updateIsLoading(false)
     },
 
     removeFromFilter(value, type) {

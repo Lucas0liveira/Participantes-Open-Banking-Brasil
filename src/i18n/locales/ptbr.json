@@ -59,5 +59,6 @@
     "charts": "Gráficos",
     "api": "API",
     "language": "Idioma"
-  }
+  },
+  "loading" : "Carreando dados dos participantes..."
 }

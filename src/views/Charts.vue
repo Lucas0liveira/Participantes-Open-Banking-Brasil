@@ -41,6 +41,7 @@ import {
 } from '@/services/participants.service'
 import mediaQueryMixin from '@/mixins/mediaQuery.mixin'
 import { ROLE_OPTIONS, API_RESOURCE_OPTIONS } from '@/constants.js'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'ChartsPage',
@@ -171,9 +172,12 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['updateIsLoading']),
+    ...mapActions(['resetFilters']),
+
     async fetchDataAsync(source) {
-      this.loading = true
       let endpoint = null
+      this.resetFilters()
 
       switch (source.code) {
         case 'production':
@@ -190,12 +194,13 @@ export default {
       if (source.code === 'sandbox') {
         endpoint = () => fetchFromSandbox()
       }
+      this.updateIsLoading(true)
       try {
         this.data = await endpoint()
       } catch (error) {
         console.error(error)
       } finally {
-        this.loading = false
+        this.updateIsLoading(false)
       }
     },
   },
