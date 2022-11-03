@@ -14,6 +14,13 @@ Both English and Brazilian Portuguese are supported.
 ### Live Demo
 You can check out the result by following clicking [here](https://exemplo.com/)
 
+
+## Known issues
+
+The following endpoint didn't respond the requests, and as to the current date, it doens't work properly in my Dashboard, showing no valid data.
+("https://data.sandbox.directory.opinbrasil.org.br/participants")
+
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
@@ -45,9 +52,3 @@ yarn build
 ```sh
 yarn lint
 ```
-
-## Known issues
-
-The following endpoint didn't respond the requests, and as to the current date, it doens't work properly in my Dashboard, showing no valid data.
-("https://data.sandbox.directory.opinbrasil.org.br/participants")
-
