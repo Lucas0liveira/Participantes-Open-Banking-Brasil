@@ -1,0 +1,63 @@
+{
+  "dashboard": {
+    "page-title": "Dashboard",
+    "filter": "Filtrar",
+    "table": {
+      "legalName": "Razão social",
+      "address": "Endereço",
+      "status": "Status"
+    },
+    "list":{
+      "legalName": "Razão social",
+      "address": "Endereço",
+      "status": "Status"
+    },
+    "lazyLoad": {
+      "showMore": "Mostrar mais",
+      "showLess": "Mostrar menos"
+    },
+    "active": "Ativo",
+    "inactive": "Inativo"
+  },
+  "charts": {
+    "pageTitle": "Gráficos",
+    "titles": [  
+      "Distribuição de papéis por participante",
+      "Quantidade média de recursos por servidor",
+      "Distribuição de recursos por banco"
+    ]
+  },
+  "filters": {
+    "title": "Filtros",
+    "filterButton": "Filtrar",
+    "clearButton": "Limpar Filtros",
+    "roles": "Papéis",
+    "roleStatus": "Status do papel"
+  },
+  "details": {
+    "title": "Detalhes do Participante",
+    "participant": {
+      "address": "Endereço",
+      "status": "Status",
+      "roles": {
+        "title":"Papéis",
+        "active": "Ativo",
+        "inactive": "Inativo"
+      },
+      "servers": {
+        "title": "Servidores",
+        "description": "Descrição",
+        "familyType": "Família",
+        "version": "Versão",
+        "endpoints": "Endpoints"
+      }
+    },
+    "backButton": "Voltar"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "charts": "Gráficos",
+    "api": "API",
+    "language": "Idioma"
+  }
+}
