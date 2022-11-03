@@ -12,6 +12,7 @@ import {
   faXmark,
   faChevronDown,
   faChevronUp,
+  faSpinner,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -24,7 +25,8 @@ library.add(
   faCircleXmark,
   faXmark,
   faChevronDown,
-  faChevronUp
+  faChevronUp,
+  faSpinner
 )
 
 Vue.component('fa-icon', FontAwesomeIcon)
