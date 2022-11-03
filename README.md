@@ -12,7 +12,7 @@ You're currently able to:
 Both English and Brazilian Portuguese are supported.
 
 ### Live Demo
-You can check out the result by following clicking [here](https://participantes-open-banking-brasil.vercel.app/)
+You can check out the result by following clicking [here](https://participantes-open-banking-brasil-59ae.vercel.app/)
 
 
 ## Known issues
