@@ -18,7 +18,7 @@
           :class="{ center: !showMenu }"
         >
           <fa-icon icon="server" />
-          <p v-show="showMenu">Dashboard</p>
+          <p v-show="showMenu">{{ $t('menu.dashboard') }}</p>
         </router-link>
 
         <router-link
@@ -27,7 +27,7 @@
           :class="{ center: !showMenu }"
         >
           <fa-icon icon="chart-simple" />
-          <p v-show="showMenu">Charts</p>
+          <p v-show="showMenu">{{ $t('menu.charts') }}</p>
         </router-link>
       </div>
     </template>
@@ -36,7 +36,7 @@
       <div class="v-menu-actions">
         <VSelect
           v-show="showMenu"
-          label="API"
+          :label="$t('menu.api')"
           :selected="selectedEndpoint"
           :options="endpoints"
           :clearable="false"
@@ -44,7 +44,7 @@
         />
         <VSelect
           v-show="showMenu"
-          label="Language"
+          :label="$t('menu.language')"
           :selected="currentLang"
           :clearable="false"
           :options="[

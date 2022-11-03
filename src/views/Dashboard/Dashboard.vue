@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/valid-v-for -->
 <template>
   <div class="dashboard">
-    <VPageHeader :title="$t('welcome')">
+    <VPageHeader :title="$t('dashboard.pageTitle')">
       <template v-slot:actions>
         <VButton
-          title="Filter"
+          :title="$t('dashboard.filter')"
           icon="filter"
           :iconOnly="smallScreenAndDown"
           @click="updateShowFilter(true)"

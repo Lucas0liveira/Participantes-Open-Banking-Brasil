@@ -10,7 +10,7 @@
     >
       <template v-slot:header>
         <div class="v-details-header">
-          <p>Details</p>
+          <p>{{ $t('details.title') }}</p>
           <fa-icon icon="xmark" @click="$emit('close')" />
         </div>
         <hr />
@@ -29,7 +29,9 @@
             </p>
           </div>
           <div class="v-details__main-data">
-            <p class="v-details__main-data--title">Address</p>
+            <p class="v-details__main-data--title">
+              {{ $t('details.participant.address') }}
+            </p>
             <p class="v-details__main-data--value">
               {{
                 getDetailedOrganisation.address +
@@ -39,7 +41,9 @@
             </p>
           </div>
           <div class="v-details__main-data">
-            <p class="v-details__main-data--title">Status</p>
+            <p class="v-details__main-data--title">
+              {{ $t('details.participant.status') }}
+            </p>
             <p class="v-details__main-data--value">
               {{ getDetailedOrganisation.status }}
             </p>
@@ -49,7 +53,9 @@
         <div class="v-details__collapsible">
           <VCollapsible :open="showRoles" @toggle="showRoles = !showRoles">
             <template v-slot:header>
-              <p class="v-details__collapsible--title">Roles</p>
+              <p class="v-details__collapsible--title">
+                {{ $t('details.participant.roles.title') }}
+              </p>
             </template>
             <template v-slot:content>
               <div class="roles">
@@ -60,7 +66,11 @@
                 >
                   <p class="roles__data--role">{{ role.role }}</p>
                   <p class="roles__data--status" :class="role.status">
-                    {{ role.status }}
+                    {{
+                      role.status === 'Active'
+                        ? $t('details.participant.roles.active')
+                        : $t('details.participant.roles.inactive')
+                    }}
                   </p>
                 </div>
               </div>
@@ -74,7 +84,9 @@
             @toggle="showServers = !showServers"
           >
             <template v-slot:header>
-              <p class="v-details__collapsible--title">Servers</p>
+              <p class="v-details__collapsible--title">
+                {{ $t('details.participant.servers.title') }}
+              </p>
             </template>
             <template v-slot:content>
               <div class="servers">
@@ -91,7 +103,9 @@
                     </template>
                     <template v-slot:content>
                       <div class="server__data">
-                        <p class="server__data--title">Description</p>
+                        <p class="server__data--title">
+                          {{ $t('details.participant.servers.description') }}
+                        </p>
                         <p class="server__data--value">
                           {{ server.authServerDescription }}
                         </p>
@@ -104,20 +118,24 @@
                         <p class="server__resource-title"></p>
                         <div class="server__resource-data">
                           <p class="server__resource-data--title">
-                            Family Type
+                            {{ $t('details.participant.servers.familyType') }}
                           </p>
                           <p class="server__resource-data--value">
                             {{ resource.familyType }}
                           </p>
                         </div>
                         <div class="server__resource-data">
-                          <p class="server__resource-data--title">Version</p>
+                          <p class="server__resource-data--title">
+                            {{ $t('details.participant.servers.version') }}
+                          </p>
                           <p class="server__resource-data--value">
                             {{ resource.version }}
                           </p>
                         </div>
                         <div class="server__resource-data">
-                          <p class="server__resource-data--title">Endpoints:</p>
+                          <p class="server__resource-data--title">
+                            {{ $t('details.participant.servers.endpoints') }}:
+                          </p>
                         </div>
                         <div
                           v-for="endpoint in resource.endpoints"
@@ -131,71 +149,6 @@
                         <hr />
                       </div>
                     </template>
-
-                    <div
-                      v-for="resource in server.apiResources"
-                      :key="resource.familyType"
-                      class="server__resource"
-                    >
-                      <p class="server__resource-title"></p>
-                      <div class="server__resource-data">
-                        <p class="server__resource-data--title">Family Type</p>
-                        <p class="server__resource-data--value">
-                          {{ resource.familyType }}
-                        </p>
-                      </div>
-                      <div class="server__resource-data">
-                        <p class="server__resource-data--title">Version</p>
-                        <p class="server__resource-data--value">
-                          {{ resource.version }}
-                        </p>
-                      </div>
-                      <div class="server__resource-data">
-                        <p class="server__resource-data--title">Endpoints:</p>
-                      </div>
-                      <div
-                        v-for="endpoint in resource.endpoints"
-                        :key="endpoint.ApiDiscoveryId"
-                        class="server__resource-links"
-                      >
-                        <a :href="endpoint.ApiEndpoint">{{
-                          endpoint.ApiEndpoint
-                        }}</a>
-                      </div>
-                      <hr />
-                    </div>
-                    <div
-                      v-for="resource in server.apiResources"
-                      :key="resource.familyType"
-                      class="server__resource"
-                    >
-                      <p class="server__resource-title"></p>
-                      <div class="server__resource-data">
-                        <p class="server__resource-data--title">Family Type</p>
-                        <p class="server__resource-data--value">
-                          {{ resource.familyType }}
-                        </p>
-                      </div>
-                      <div class="server__resource-data">
-                        <p class="server__resource-data--title">Version</p>
-                        <p class="server__resource-data--value">
-                          {{ resource.version }}
-                        </p>
-                      </div>
-                      <div class="server__resource-data">
-                        <p class="server__resource-data--title">Endpoints:</p>
-                      </div>
-                      <div
-                        v-for="endpoint in resource.endpoints"
-                        :key="endpoint.ApiDiscoveryId"
-                        class="server__resource-links"
-                      >
-                        <a :href="endpoint.ApiEndpoint">{{
-                          endpoint.ApiEndpoint
-                        }}</a>
-                      </div>
-                      <hr />
-                    </div>
                   </VCollapsible>
                 </template>
               </div>
@@ -207,7 +160,7 @@
       <template v-slot:footer>
         <VButton
           class="v-details__back-button"
-          title="Back"
+          :title="$t('details.backButton')"
           type="primary"
           @click="$emit('close')"
         />

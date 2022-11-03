@@ -4,9 +4,21 @@
       <thead :class="showMenu ? 'opened' : 'closed'">
         <tr>
           <th><div class="th__cnpj">CNPJ</div></th>
-          <th><div class="th__legal-name">Legal name</div></th>
-          <th><div class="th__address">Address</div></th>
-          <th><div class="th__status">Status</div></th>
+          <th>
+            <div class="th__legal-name">
+              {{ $t('dashboard.table.legalName') }}
+            </div>
+          </th>
+          <th>
+            <div class="th__address">
+              {{ $t('dashboard.table.address') }}
+            </div>
+          </th>
+          <th>
+            <div class="th__status">
+              {{ $t('dashboard.table.status') }}
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody :class="showMenu ? 'opened' : 'closed'">
@@ -59,14 +71,20 @@
           </p>
         </div>
         <div class="v-list__item-bundle">
-          <p class="v-list__item-bundle--title">Legal Name</p>
+          <p class="v-list__item-bundle--title">
+            {{ $t('dashboard.list.legalName') }}
+          </p>
           <p class="v-list__item-bundle--value">
             {{ org.legalEntityName }}
           </p>
         </div>
         <div class="v-list__item-bundle--status">
           <p :class="org.status === 'Active' ? 'active' : 'inactive'">
-            {{ org.status }}
+            {{
+              org.status === 'Active'
+                ? $t('dashboard.active')
+                : $t('dashboard.inactive')
+            }}
           </p>
         </div>
       </div>
@@ -76,12 +94,12 @@
       <VButton
         v-if="canShowLess"
         type="secondary"
-        title="Show less"
+        :title="$t('dashboard.lazyLoad.showLess')"
         @click="$emit('showLess')"
       />
       <VButton
         v-if="canShowMore"
-        title="Show more"
+        :title="$t('dashboard.lazyLoad.showMore')"
         @click="$emit('showMore')"
       />
     </div>

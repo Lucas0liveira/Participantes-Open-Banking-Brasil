@@ -8,7 +8,7 @@
     >
       <template v-slot:header>
         <div class="v-filter-header">
-          <p>Filters</p>
+          <p>{{ $t('filters.title') }}</p>
           <fa-icon icon="xmark" @click="$emit('close')" />
         </div>
         <hr />
@@ -17,7 +17,7 @@
       <template v-slot:body>
         <div class="v-filter-body">
           <VSelect
-            label="Roles"
+            :label="$t('filters.roles')"
             :selected="activeRoles"
             :options="rolesOptions"
             :multiple="true"
@@ -26,7 +26,7 @@
           />
 
           <VSelect
-            label="Role Status"
+            :label="$t('filters.roleStatus')"
             :selected="selectedStatus"
             :options="statusOptions"
             @selected="(e) => updateStatus(e.code)"
@@ -36,8 +36,12 @@
 
       <template v-slot:footer>
         <div class="v-filter-footer">
-          <VButton type="secondary" title="Clear" @click="clearFilters()" />
-          <VButton title="Filter" @click="filter()" />
+          <VButton
+            type="secondary"
+            :title="$t('filters.clearButton')"
+            @click="clearFilters()"
+          />
+          <VButton :title="$t('filters.filterButton')" @click="filter()" />
         </div>
       </template>
     </VSideBar>

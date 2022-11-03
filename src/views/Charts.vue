@@ -1,17 +1,17 @@
 <template>
   <div class="charts-container">
-    <VPageHeader :title="$t('welcome')" />
+    <VPageHeader :title="$t('charts.pageTitle')" />
     <div class="charts">
       <div v-if="mediumScreenAndUp" class="charts-top">
         <VChart
-          title="Distribution of roles by participants"
+          :title="$t('charts.titles.0')"
           type="donut"
           :options="bankPerRole.chartOptions"
           :series="bankPerRole.series"
         />
 
         <VChart
-          title="Average number of resouces per server"
+          :title="$t('charts.titles.1')"
           type="radialBar"
           :options="averageResourcesPerServer.chartOptions"
           :series="averageResourcesPerServer.series"
@@ -20,7 +20,7 @@
 
       <VChart
         v-if="mediumScreenAndUp"
-        title="Distribution of resources between banks"
+        :title="$t('charts.titles.2')"
         type="area"
         :options="serversPerResource.options"
         :series="serversPerResource.series"

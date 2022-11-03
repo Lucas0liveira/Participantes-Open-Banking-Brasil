@@ -1,3 +1,63 @@
 {
-  "welcome": "Welcome to the Dashboard"
+  "dashboard": {
+    "pageTitle": "Dashboard",
+    "filter": "Filter",
+    "table": {
+      "legalName": "Legal name",
+      "address": "Address",
+      "status": "Status"
+    },
+    "list":{
+      "legalName": "Legal name",
+      "address": "Address",
+      "status": "Status"
+    },
+    "lazyLoad": {
+      "showMore": "Show more",
+      "showLess": "ShowLess"
+    },
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "charts": {
+    "pageTitle": "Charts",
+    "titles": [  
+      "Distribution of roles by participants",
+      "Average number of resouces per server",
+      "Distribution of resources between banks"
+    ]
+  },
+  "filters": {
+    "title": "Filters",
+    "filterButton": "Filter",
+    "clearButton": "Clear",
+    "roles": "Roles",
+    "roleStatus": "Role Status"
+  },
+  "details": {
+    "title": "Details",
+    "participant": {
+      "address": "Address",
+      "status": "Status",
+      "roles": {
+        "title":"Roles",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "servers": {
+        "title": "Servers",
+        "description": "Description",
+        "familyType": "Family Type",
+        "version": "Version",
+        "endpoints": "Endpoints"
+      }
+    },
+    "backButton": "Back"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "charts": "Charts",
+    "api": "API",
+    "language": "Language"
+  }  
 }
